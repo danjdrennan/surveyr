@@ -1,12 +1,10 @@
 Package: surveyr
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Summary Statistics and Visualizations for Surveys
+Version: 0.0.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Daniel", "Drennan", , "danjdrennan@stat.tamu.edu", role = c("aut", "cre"))
+Description: Provides tools for designing surveys and working with survey data. The package will implement methods for visualizing data, computing and tabulating summary statistics, and estimating confidence intervals for surveys using simple random samples, stratified designs, and ratio/regression estimation via the tidyverse family of packages.
+License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
