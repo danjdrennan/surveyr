@@ -4,7 +4,10 @@ Version: 0.0.0
 Authors@R: 
     person("Daniel", "Drennan", , "danjdrennan@stat.tamu.edu", role = c("aut", "cre"))
 Description: Provides tools for designing surveys and working with survey data. The package will implement methods for visualizing data, computing and tabulating summary statistics, and estimating confidence intervals for surveys using simple random samples, stratified designs, and ratio/regression estimation via the tidyverse family of packages.
-License: AGPL (>= 3)
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
