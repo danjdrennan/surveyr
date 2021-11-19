@@ -18,7 +18,6 @@ Installation should be done via `devtools` in R.
 Run the following code to install via GitHub.
 
 ```{r}
-# install surveyr
 devtools::install_github("danjdrennan/surveyr")
 ```
 
