@@ -85,3 +85,42 @@ test_that(".cv_mean for simple random samples error handling/computations", {
     )
     expect_equal(.cv_mean(y, 10*N, weights=w), 0.5)
 })
+
+test_that("estimates for total are correctly handled", {
+    y <- 1:3
+    N <- 50
+    w <- rep(50/3, 3)
+    expect_error(.total(y), "N or weights must be supplied")
+    expect_error(.total(y, w), "N must be an integer")
+    expect_equal(.total(y, N), 100)
+    expect_equal(.total(y, weights=w), 100)
+})
+
+test_that("variance for a total in SRS design passes", {
+    y <- 1:5
+    N <- 50
+    expect_error(.var_total(y, 1))
+    expect_equal(.var_total(y, N), N^2 * 2.25)
+    expect_equal(.var_total(y, N, fpc=FALSE), N^2*2.5)
+})
+
+test_that("se for total in SRS passes", {
+    y <- 1:5
+    N <- 50
+    expect_error(.se_total(y, 1))
+    expect_equal(.se_total(y, N), N * 1.5)
+})
+
+test_that("cv for a total computes expectedly", {
+    y <- 1:5
+    N <- length(y)
+    w <- rep(2, length(y))
+    expect_error(.cv_total(y, 1))
+    expect_equal(.cv_total(y, 5), 0.0)
+    expect_equal(.cv_total(y, 10*N), 0.5)
+    expect_equal(
+        .cv_total(y, fpc=FALSE),
+        .cv_mean(y, 10*N, fpc=FALSE)
+    )
+    expect_equal(.cv_total(y, 10*N, weights=w), 0.5)
+})
