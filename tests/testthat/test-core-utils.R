@@ -124,3 +124,35 @@ test_that("cv for a total computes expectedly", {
     )
     expect_equal(.cv_total(y, 10*N, weights=w), 0.5)
 })
+
+test_that("proportion function for SRS functions correctly", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
+    expect_error(.prop(c(y, 2)), "A 0-1 variable must be supplied")
+    expect_equal(.prop(y), 0.6)
+    expect_equal(.prop(y, w), 0.6)
+
+    expect_equal(.var_p(y), 0.3)
+    expect_equal(.var_p(y), .var_p(y, w))
+})
+
+test_that("proportion variance functions for SRS function as expected", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
+    N <- 10
+    expect_error(.var_prop(y), "N >= n must be supplied when using fpc")
+    expect_error(.var_prop(y, 1), "N < n provided. N >= n required.")
+    expect_equal(.var_prop(y, N), 0.03)
+    expect_equal(.var_prop(y, 5), 0.0)
+    expect_equal(.var_prop(y, 1, fpc=FALSE), .var_prop(y, fpc=FALSE))
+})
+
+test_that("SE(p) is correctly estimated", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
+    N <- 10
+    expect_error(.se_prop(y), "N >= n must be supplied when using fpc")
+    expect_error(.se_prop(y, 1), "N < n provided. N >= n required.")
+    expect_equal(.se_prop(y, N), 0.17320508)
+    expect_equal(.se_prop(y, 5), 0.0)
+})

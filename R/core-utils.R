@@ -68,3 +68,43 @@
 .cv_total <- function(y, N=NULL, fpc=TRUE, weights=NULL){
     .cv_mean(y, N, fpc, weights)
 }
+
+# Functions for estimating a proportion using SRS samples
+.prop <- function(y, weights = NULL){
+    if(!all(y %in% 0:1)){
+        stop("A 0-1 variable must be supplied")
+    }
+    .mean(y, weights)
+}
+
+.var_p <- function(y, weights=NULL){
+    p <- .prop(y, weights)
+    n <- length(y)
+    s2 <- n / (n-1) * p * (1 - p)
+    return(s2)
+}
+
+.var_prop <- function(y, N=NULL, fpc=TRUE, weights=NULL){
+    n <- length(y)
+    # Only depend on N as input when computing finite population correction (fpc)
+    if(fpc){
+        if(is.null(N)){
+            stop("N >= n must be supplied when using fpc")
+        }else{
+            if(N < n)
+                stop("N < n provided. N >= n required.")
+        }
+        s2 <- (1 - n / N) * .var_p(y, weights) / n
+    } else{
+        s2 <- .var_p(y, weights) / n
+    }
+    return(s2)
+}
+
+.se_prop <- function(y, N=NULL, fpc=TRUE, weights=NULL){
+    sqrt(.var_prop(y, N, fpc))
+}
+
+.cv_prop <- function(y, N=NULL, fpc=TRUE, weights=NULL){
+    .se_prop(y, N, fpc) / .prop(y, weights)
+}
