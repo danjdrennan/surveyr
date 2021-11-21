@@ -4,5 +4,5 @@
 #' @importFrom stats sd
 #' @importFrom stats var
 #' @importFrom stats cov
-#' @importFrom cor
+#' @importFrom stats cor
 NULL
