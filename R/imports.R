@@ -1,4 +1,4 @@
 # imports.R
 #' @import dplyr
-#' @importFrom as_factor
+#' @importFrom forcats as_factor
 NULL
