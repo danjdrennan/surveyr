@@ -1,4 +1,6 @@
-# Surveyr
+# surveyr
+
+[![Codecov test coverage](https://codecov.io/gh/danjdrennan/surveyr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danjdrennan/surveyr?branch=main)
 
 An R package for working with survey data.
 
