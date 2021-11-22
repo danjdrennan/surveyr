@@ -1,11 +1,11 @@
 test_that("sampling_distribution handles bad inputs", {
     expect_error(
-        sampling_distribution(1:5, 10),
-        "n must be less than length(y)"
-    )
-    expect_error(
         sampling_distribution(letters, 3),
         "y must be a numeric vector"
+    )
+    expect_error(
+        sampling_distribution(1:5, 10),
+        "n must be less than N"
     )
 })
 
