@@ -14,5 +14,8 @@ Config/testthat/edition: 3
 Imports: 
     dplyr,
     forcats,
+    magrittr,
     ggplot2,
-    stats
+    stats,
+    tibble,
+    utils
