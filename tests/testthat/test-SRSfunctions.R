@@ -16,11 +16,9 @@ test_that(".mean functions as expected for simple random samples", {
     expect_error(.mean(y, w[1]), "weights and y must be the same length")
 })
 
-test_that(".var_mean functionality for simple random samples", {
+test_that(".var_mean type checks work", {
     y <- 1:5
     N <- length(y)
-    # Prove error handling when fpc = TRUE
-    # Note N can be anything when fpc = FALSE
     expect_error(
         .var_mean(y),
         "N >= n must be supplied when using fpc"
@@ -29,23 +27,21 @@ test_that(".var_mean functionality for simple random samples", {
         .var_mean(y, N=1, fpc=TRUE),
         "N < n provided. N >= n required."
     )
-    # The first case implies a census was taken
+})
+test_that(".var_mean correctly computes for SRS", {
+    y <- 1:5
+    N <- length(y)
     expect_equal(.var_mean(y, N), 0.0)
     expect_equal(.var_mean(y, 10*N), 2.25)
-    # The next two tests must be equivalent
     expect_equal(
         .var_mean(y, fpc=FALSE),
         .var_mean(y, N, fpc=FALSE)
     )
 })
 
-test_that(".se_mean for simple random samples", {
+test_that(".se_mean type handling", {
     y <- 1:5
     N <- length(y)
-    # .se_mean wraps .var_mean equivalent to sqrt(.var_mean)
-    # all error conditions must be satisfied in this case as before
-    # For the user, the difference shouldn't matter because the computations
-    # are all equivalent
     expect_error(
         .se_mean(y),
         "N >= n must be supplied when using fpc"
@@ -54,16 +50,21 @@ test_that(".se_mean for simple random samples", {
         .se_mean(y, N=1, fpc=TRUE),
         "N < n provided. N >= n required."
     )
+})
+
+test_that(".se_mean correctness checks", {
+    y <- 1:5
+    N <- length(y)
     expect_equal(.se_mean(y, N), 0.0)
     expect_equal(.se_mean(y, 10*N), sqrt(.var_mean(y, 10*N)))
-    # Again, these two arguments MUST be equivalent
+    # must reach equality
     expect_equal(
         .se_mean(y, fpc=FALSE),
         .se_mean(y, 10*N, fpc = FALSE)
     )
 })
 
-test_that(".cv_mean for simple random samples error handling/computations", {
+test_that(".cv_mean error checks are correctly handled", {
     y <- 1:5
     N <- length(y)
     w <- rep(2, length(y))
@@ -77,6 +78,12 @@ test_that(".cv_mean for simple random samples error handling/computations", {
         .cv_mean(y, 1),
         "N < n provided. N >= n required."
     )
+})
+
+test_that(".cv_mean correctness", {
+    y <- 1:5
+    N <- length(y)
+    w <- rep(2, length(y))
     expect_equal(.cv_mean(y, 5), 0.0)
     expect_equal(.cv_mean(y, 10*N), 0.5)
     expect_equal(
@@ -86,17 +93,23 @@ test_that(".cv_mean for simple random samples error handling/computations", {
     expect_equal(.cv_mean(y, 10*N, weights=w), 0.5)
 })
 
-test_that("estimates for total are correctly handled", {
+test_that(".total handles type errors", {
     y <- 1:3
     N <- 50
     w <- rep(50/3, 3)
     expect_error(.total(y), "N or weights must be supplied")
     expect_error(.total(y, w), "N must be an integer")
+})
+
+test_that(".total computes correctly", {
+    y <- 1:3
+    N <- 50
+    w <- rep(50/3, 3)
     expect_equal(.total(y, N), 100)
     expect_equal(.total(y, weights=w), 100)
 })
 
-test_that("variance for a total in SRS design passes", {
+test_that(".var_total correctness", {
     y <- 1:5
     N <- 50
     expect_error(.var_total(y, 1))
@@ -104,18 +117,24 @@ test_that("variance for a total in SRS design passes", {
     expect_equal(.var_total(y, N, fpc=FALSE), N^2*2.5)
 })
 
-test_that("se for total in SRS passes", {
+test_that(".se_total correctness", {
     y <- 1:5
     N <- 50
     expect_error(.se_total(y, 1))
     expect_equal(.se_total(y, N), N * 1.5)
 })
 
-test_that("cv for a total computes expectedly", {
+test_that(".cv_error handling", {
     y <- 1:5
     N <- length(y)
     w <- rep(2, length(y))
     expect_error(.cv_total(y, 1))
+})
+
+test_that(".cv_error correctness", {
+    y <- 1:5
+    N <- length(y)
+    w <- rep(2, length(y))
     expect_equal(.cv_total(y, 5), 0.0)
     expect_equal(.cv_total(y, 10*N), 0.5)
     expect_equal(
@@ -125,34 +144,64 @@ test_that("cv for a total computes expectedly", {
     expect_equal(.cv_total(y, 10*N, weights=w), 0.5)
 })
 
-test_that("proportion function for SRS functions correctly", {
+test_that(".prop error handling", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
     expect_error(.prop(c(y, 2)), "A 0-1 variable must be supplied")
+})
+
+test_that(".prop correctness checks", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
     expect_equal(.prop(y), 0.6)
     expect_equal(.prop(y, w), 0.6)
+})
 
+test_that(".var_p correctness checks", {
+    #.var_p is the standard deviation of a proportion
+    # This required a custom definition to make sure it was computed correctly
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
     expect_equal(.var_p(y), 0.3)
     expect_equal(.var_p(y), .var_p(y, w))
 })
 
-test_that("proportion variance functions for SRS function as expected", {
+test_that(".var_prop error handling", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
     N <- 10
     expect_error(.var_prop(y), "N >= n must be supplied when using fpc")
     expect_error(.var_prop(y, 1), "N < n provided. N >= n required.")
+})
+
+test_that(".var_prop correctness checks", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
+    N <- 10
     expect_equal(.var_prop(y, N), 0.03)
     expect_equal(.var_prop(y, 5), 0.0)
     expect_equal(.var_prop(y, 1, fpc=FALSE), .var_prop(y, fpc=FALSE))
 })
 
-test_that("SE(p) is correctly estimated", {
+test_that(".se_prop error handling", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
     N <- 10
     expect_error(.se_prop(y), "N >= n must be supplied when using fpc")
     expect_error(.se_prop(y, 1), "N < n provided. N >= n required.")
+})
+
+test_that(".se_prop correctness checks", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
+    N <- 10
     expect_equal(.se_prop(y, N), 0.17320508)
     expect_equal(.se_prop(y, 5), 0.0)
+})
+
+test_that(".cv_prop correctness checks", {
+    y <- c(0, 0, 1, 1, 1)
+    w <- rep(3, length(y))
+    N <- 10
+    expect_equal(.cv_prop(y, N), 0.17320508 / 0.6)
 })
