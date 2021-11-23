@@ -182,3 +182,49 @@ test_that(".cv_prop correctness checks", {
     N <- 10
     expect_equal(.cv_prop(y, N), 0.17320508 / 0.6)
 })
+test_that("mk_stat passes compatibility checks", {
+    expect_error(
+        mk_stat(0),
+        "y must be a numeric vector"
+    )
+    expect_error(
+        mk_stat(1:10, N=1),
+        "N must be larger than n"
+    )
+})
+test_that("mk_stat computes expected values for input dataset", {
+    N <- 10
+    n <- 5
+    y <- c(0, 0, 0, 1, 1)
+    weights <- rep(N/n, n)
+    expect_equal(
+        mk_stat(y, stat = "mean", N, fpc=TRUE, weights=weights),
+        tibble(
+            n = 5,
+            point = 0.4,
+            var = 0.15,
+            se = sqrt(var),
+            cv = se / point
+        )
+    )
+    expect_equal(
+        mk_stat(y, stat = "total", N, fpc=TRUE, weights=weights),
+        tibble(
+            n = 5,
+            point = 4,
+            var = 15,
+            se = sqrt(var),
+            cv = se / point
+        )
+    )
+    expect_equal(
+        mk_stat(y, stat = "prop", N, fpc=TRUE, weights=weights),
+        tibble(
+            n = 5,
+            point = 0.4,
+            var = 0.03,
+            se = sqrt(var),
+            cv = se / point
+        )
+    )
+})

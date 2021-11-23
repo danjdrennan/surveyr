@@ -1,9 +1,11 @@
-## Contains several support functions that will be used throughout the package.
-## The main contents are formulas for computing totals, means, and proportions
-## under different survey designs (using stratification and clustering, namely).
+# Core functions used to compute statistics for simple random samples.
+# Functions for point estimates, variances, etc., are abstracted from the user
+# and made available through the function mk_stats.
 
-# Functions for Simple Random Samples
-# Start with the mean, then its variance and standard error and CV
+mk_stat <- function(y, stat="mean", N=NULL, fpc=TRUE, weights=NULL){
+    stop("Not implemented")
+}
+
 .mean <- function(y, weights = NULL){
     if(is.null(weights)){
         return(mean(y))
