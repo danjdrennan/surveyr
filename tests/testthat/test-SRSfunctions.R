@@ -184,12 +184,20 @@ test_that(".cv_prop correctness checks", {
 })
 test_that("mk_stat passes compatibility checks", {
     expect_error(
-        mk_stat(0),
-        "y must be a numeric vector"
+        mk_stat(0, N=1),
+        "y must be a numeric vector with"
+    )
+    expect_error(
+        mk_stat(1:10),
+        "N > n must be supplied"
     )
     expect_error(
         mk_stat(1:10, N=1),
-        "N must be larger than n"
+        "N must be greater than n"
+    )
+    expect_error(
+        mk_stat(1:10, stat="failure!", N = 12),
+        "stat must be one of mean, total, or prop"
     )
 })
 test_that("mk_stat computes expected values for input dataset", {
@@ -199,7 +207,7 @@ test_that("mk_stat computes expected values for input dataset", {
     weights <- rep(N/n, n)
     expect_equal(
         mk_stat(y, stat = "mean", N, fpc=TRUE, weights=weights),
-        tibble(
+        dplyr::tibble(
             n = 5,
             point = 0.4,
             var = 0.15,
@@ -209,7 +217,7 @@ test_that("mk_stat computes expected values for input dataset", {
     )
     expect_equal(
         mk_stat(y, stat = "total", N, fpc=TRUE, weights=weights),
-        tibble(
+        dplyr::tibble(
             n = 5,
             point = 4,
             var = 15,
@@ -219,7 +227,7 @@ test_that("mk_stat computes expected values for input dataset", {
     )
     expect_equal(
         mk_stat(y, stat = "prop", N, fpc=TRUE, weights=weights),
-        tibble(
+        dplyr::tibble(
             n = 5,
             point = 0.4,
             var = 0.03,

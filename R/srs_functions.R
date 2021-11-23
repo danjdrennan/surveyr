@@ -3,7 +3,58 @@
 # and made available through the function mk_stats.
 
 mk_stat <- function(y, stat="mean", N=NULL, fpc=TRUE, weights=NULL){
-    stop("Not implemented")
+    if(!(is.numeric(y) && length(y)>1)){
+        stop(
+            "y must be a numeric vector with length(y) > 1",
+            call. = FALSE
+        )
+    }
+    if(is.null(N)){
+        stop(
+            "N > n must be supplied (n = length(y))",
+            call. = FALSE
+        )
+    }else{
+        if(N < length(y)){
+            stop(
+                "N must be greater than n = length(y)",
+                call. = FALSE
+            )
+        }
+    }
+    if(!(stat %in% c("mean", "total", "prop"))){
+        stop(
+            "stat must be one of mean, total, or prop",
+            call. = FALSE
+        )
+    }
+    n = length(y)
+    if(stat == "mean"){
+        tbl = list(
+            n = n,
+            point = .mean(y=y, weights=weights),
+            var = .var_mean(y=y, N=N, fpc=fpc),
+            se = .se_mean(y=y, N=N, fpc=fpc),
+            cv = .cv_mean(y, N=N, fpc=fpc, weights=weights)
+        )
+    }else if(stat == "total"){
+        tbl = list(
+            n = n,
+            point = .total(y=y, weights=weights),
+            var = .var_total(y=y, N=N, fpc=fpc),
+            se = .se_total(y=y, N=N, fpc=fpc),
+            cv = .cv_total(y, N=N, fpc=fpc, weights=weights)
+        )
+    }else if(stat == "prop"){
+        tbl = list(
+            n = n,
+            point = .prop(y=y, weights=weights),
+            var = .var_prop(y=y, N=N, fpc=fpc),
+            se = .se_prop(y=y, N=N, fpc=fpc),
+            cv = .cv_prop(y, N=N, fpc=fpc, weights=weights)
+        )
+    }
+    return(dplyr::as_tibble(tbl))
 }
 
 .mean <- function(y, weights = NULL){
