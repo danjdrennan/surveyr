@@ -1,7 +1,75 @@
 # Core functions used to compute statistics for simple random samples.
 # Functions for point estimates, variances, etc., are abstracted from the user
 # and made available through the function mk_stats.
-
+#' mk_stat
+#'
+#' @description
+#' Function to get point estimates and statistics associated with them.
+#' Given a point estimate (mean, total, prop), `mk_stat` will generate the
+#'   - sample size, n, at calling time
+#'   - point estimate
+#'   - estimator variance
+#'   - standard error
+#'   - coefficient of variation
+#' assuming a simple random sample of data.
+#'
+#' @param y
+#' A numeric vector with at least two elements
+#' @param stat
+#' A string, either "mean", "total", or "prop" (proportion)
+#' @param N
+#' The population size.
+#' This must be supplied and must be larger than length(y).
+#' If unknown, recommend passing it as some N > n with fpc=FALSE.
+#' @param fpc
+#' TRUE/FALSE.
+#' Whether or not to compute a finite population correction (for variance).
+#' @param weights
+#' Optional.
+#' If passed, it must be a vector of weights at least as long as the input y.
+#'
+#' @return
+#' tibble with
+#'  - n (sample size)
+#'  - point estimate (stat: mean, total, proportion)
+#'  - estimator variance (not the same as population variance)
+#'  - estimator standard error
+#'  - coefficient of variation
+#'
+#' @references
+#' Lohr, Sharon L. Sampling: Design and Analysis. Chapman and Hall/CRC, 2019.
+#' @export
+#'
+#' @examples
+#' N <- 10
+#' n <- 5
+#' y <- c(0, 0, 0, 1, 1)
+#' weights <- rep(N/n, n)
+#' mk_stat(y, stat="mean", N, fpc=TRUE, weights=weights)
+#' # A tibble: 1 x 5
+#' #      n point   var    se    cv
+#' #  <int> <dbl> <dbl> <dbl> <dbl>
+#' #1     5   0.4  0.15 0.387 0.968
+#'
+#' N <- 10
+#' n <- 5
+#' y <- c(0, 0, 0, 1, 1)
+#' weights <- rep(N/n, n)
+#' mk_stat(y, stat="total", N, fpc=TRUE, weights=weights)
+#' # A tibble: 1 x 5
+#' #      n point   var    se    cv
+#' #  <int> <dbl> <dbl> <dbl> <dbl>
+#' #1     5     4    15  3.87 0.968
+#'
+#' #' N <- 10
+#' n <- 5
+#' y <- c(0, 0, 0, 1, 1)
+#' weights <- rep(N/n, n)
+#' mk_stat(y, stat="prop", N, fpc=TRUE, weights=weights)
+#' # A tibble: 1 x 5
+#' #      n point   var    se    cv
+#' #  <int> <dbl> <dbl> <dbl> <dbl>
+#' #1     5   0.4  0.03 0.173 0.433
 mk_stat <- function(y, stat="mean", N=NULL, fpc=TRUE, weights=NULL){
     if(!(is.numeric(y) && length(y)>1)){
         stop(

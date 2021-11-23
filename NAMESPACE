@@ -2,6 +2,7 @@
 
 export("%>%")
 export(draw_samples)
+export(mk_stat)
 export(sampling_distribution)
 import(dplyr)
 importFrom(forcats,as_factor)
