@@ -4,13 +4,16 @@
 \alias{sampling_distribution}
 \title{sampling_distribution}
 \usage{
-sampling_distribution(y, n)
+sampling_distribution(y, n, stat = "mean")
 }
 \arguments{
 \item{y}{A numeric vector of measurements on observations units.
 The population, N, will be computed as the length of y.}
 
 \item{n}{The size of samples to draw from y.}
+
+\item{stat}{A point estimate ("mean", "total", or "prop") to estimate from the population.
+Must be a string input.}
 }
 \value{
 The sampling distribution of the sample mean
@@ -26,6 +29,16 @@ bound on what samples can taken by choose(N, n).
 \examples{
 y <- c(1, 1, 2, 2, 3, 3)
 n <- 2
-sampling_distribution(y, n)
-# 1.0 1.5 1.5 2.0 2.0 1.5 1.5 2.0 2.0 2.0 2.5 2.5 2.5 2.5 3.0
+sampling_distribution(y, n, stat="mean")
+# [1] 1.0 1.5 1.5 2.0 2.0 1.5 1.5 2.0 2.0 2.0 2.5 2.5 2.5 2.5 3.0
+
+y <- c(1, 1, 2, 2, 3, 3)
+n <- 2
+sampling_distribution(y, n, stat="total")
+# [1]  6  9  9 12 12  9  9 12 12 12 15 15 15 15 18
+
+y <- c(0,0,0,0,1,1)
+n <- 2
+sampling_distribution(y, n, stat="prop")
+# [1] 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.5 0.5 0.0 0.5 0.5 0.5 0.5 1.0
 }
