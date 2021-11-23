@@ -1,21 +1,16 @@
-test_that(".mean functions as expected for simple random samples", {
-    # Confirming expected outputs for the mean, variance, standard error, and cv
-    # of a mean estimator with simple random samples.
-
+test_that(".mean function handles weight input lengths", {
     # Generate a simple dataset for testing
     y <- 1:5
     w <- rep(2, length(y))
-
-    # The mean function should return equivalent values when supplying or
-    # ignoring weights. These two tests check for correctly computed values.
-    expect_equal(.mean(y), 3.0)
-    expect_equal(.mean(y, w), 3.0)
-
-    # If weights are supplied, they must have the same length.
-    # Otherwise an error must be thrown.
     expect_error(.mean(y, w[1]), "weights and y must be the same length")
 })
-
+test_that(".mean function computes correctly", {
+    # Generate a simple dataset for testing
+    y <- 1:5
+    w <- rep(2, length(y))
+    expect_equal(.mean(y), 3.0)
+    expect_equal(.mean(y, w), 3.0)
+})
 test_that(".var_mean type checks work", {
     y <- 1:5
     N <- length(y)
@@ -38,7 +33,6 @@ test_that(".var_mean correctly computes for SRS", {
         .var_mean(y, N, fpc=FALSE)
     )
 })
-
 test_that(".se_mean type handling", {
     y <- 1:5
     N <- length(y)
@@ -51,7 +45,6 @@ test_that(".se_mean type handling", {
         "N < n provided. N >= n required."
     )
 })
-
 test_that(".se_mean correctness checks", {
     y <- 1:5
     N <- length(y)
@@ -63,7 +56,6 @@ test_that(".se_mean correctness checks", {
         .se_mean(y, 10*N, fpc = FALSE)
     )
 })
-
 test_that(".cv_mean error checks are correctly handled", {
     y <- 1:5
     N <- length(y)
@@ -79,7 +71,6 @@ test_that(".cv_mean error checks are correctly handled", {
         "N < n provided. N >= n required."
     )
 })
-
 test_that(".cv_mean correctness", {
     y <- 1:5
     N <- length(y)
@@ -92,7 +83,6 @@ test_that(".cv_mean correctness", {
     )
     expect_equal(.cv_mean(y, 10*N, weights=w), 0.5)
 })
-
 test_that(".total handles type errors", {
     y <- 1:3
     N <- 50
@@ -100,7 +90,6 @@ test_that(".total handles type errors", {
     expect_error(.total(y), "N or weights must be supplied")
     expect_error(.total(y, w), "N must be an integer")
 })
-
 test_that(".total computes correctly", {
     y <- 1:3
     N <- 50
@@ -108,7 +97,6 @@ test_that(".total computes correctly", {
     expect_equal(.total(y, N), 100)
     expect_equal(.total(y, weights=w), 100)
 })
-
 test_that(".var_total correctness", {
     y <- 1:5
     N <- 50
@@ -116,21 +104,18 @@ test_that(".var_total correctness", {
     expect_equal(.var_total(y, N), N^2 * 2.25)
     expect_equal(.var_total(y, N, fpc=FALSE), N^2*2.5)
 })
-
 test_that(".se_total correctness", {
     y <- 1:5
     N <- 50
     expect_error(.se_total(y, 1))
     expect_equal(.se_total(y, N), N * 1.5)
 })
-
 test_that(".cv_error handling", {
     y <- 1:5
     N <- length(y)
     w <- rep(2, length(y))
     expect_error(.cv_total(y, 1))
 })
-
 test_that(".cv_error correctness", {
     y <- 1:5
     N <- length(y)
@@ -143,20 +128,17 @@ test_that(".cv_error correctness", {
     )
     expect_equal(.cv_total(y, 10*N, weights=w), 0.5)
 })
-
 test_that(".prop error handling", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
     expect_error(.prop(c(y, 2)), "A 0-1 variable must be supplied")
 })
-
 test_that(".prop correctness checks", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
     expect_equal(.prop(y), 0.6)
     expect_equal(.prop(y, w), 0.6)
 })
-
 test_that(".var_p correctness checks", {
     #.var_p is the standard deviation of a proportion
     # This required a custom definition to make sure it was computed correctly
@@ -165,7 +147,6 @@ test_that(".var_p correctness checks", {
     expect_equal(.var_p(y), 0.3)
     expect_equal(.var_p(y), .var_p(y, w))
 })
-
 test_that(".var_prop error handling", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
@@ -173,7 +154,6 @@ test_that(".var_prop error handling", {
     expect_error(.var_prop(y), "N >= n must be supplied when using fpc")
     expect_error(.var_prop(y, 1), "N < n provided. N >= n required.")
 })
-
 test_that(".var_prop correctness checks", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
@@ -182,7 +162,6 @@ test_that(".var_prop correctness checks", {
     expect_equal(.var_prop(y, 5), 0.0)
     expect_equal(.var_prop(y, 1, fpc=FALSE), .var_prop(y, fpc=FALSE))
 })
-
 test_that(".se_prop error handling", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
@@ -190,7 +169,6 @@ test_that(".se_prop error handling", {
     expect_error(.se_prop(y), "N >= n must be supplied when using fpc")
     expect_error(.se_prop(y, 1), "N < n provided. N >= n required.")
 })
-
 test_that(".se_prop correctness checks", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
@@ -198,7 +176,6 @@ test_that(".se_prop correctness checks", {
     expect_equal(.se_prop(y, N), 0.17320508)
     expect_equal(.se_prop(y, 5), 0.0)
 })
-
 test_that(".cv_prop correctness checks", {
     y <- c(0, 0, 1, 1, 1)
     w <- rep(3, length(y))
