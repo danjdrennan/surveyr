@@ -206,6 +206,16 @@ test_that("mk_stat computes expected values for input dataset", {
     y <- c(0, 0, 0, 1, 1)
     weights <- rep(N/n, n)
     expect_equal(
+        mk_stat(y, stat = "mean", N, fpc=TRUE, weights=NULL),
+        dplyr::tibble(
+            n = 5,
+            point = 0.4,
+            var = 0.15,
+            se = sqrt(var),
+            cv = se / point
+        )
+    )
+    expect_equal(
         mk_stat(y, stat = "mean", N, fpc=TRUE, weights=weights),
         dplyr::tibble(
             n = 5,
@@ -216,11 +226,31 @@ test_that("mk_stat computes expected values for input dataset", {
         )
     )
     expect_equal(
+        mk_stat(y, stat="total", N, fpc=TRUE, weights=NULL),
+        dplyr::tibble(
+            n = 5,
+            point = 4,
+            var = 15,
+            se = sqrt(var),
+            cv = se / point
+        )
+    )
+    expect_equal(
         mk_stat(y, stat = "total", N, fpc=TRUE, weights=weights),
         dplyr::tibble(
             n = 5,
             point = 4,
             var = 15,
+            se = sqrt(var),
+            cv = se / point
+        )
+    )
+    expect_equal(
+        mk_stat(y, stat = "prop", N, fpc=TRUE, weights=NULL),
+        dplyr::tibble(
+            n = 5,
+            point = 0.4,
+            var = 0.03,
             se = sqrt(var),
             cv = se / point
         )

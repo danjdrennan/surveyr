@@ -108,7 +108,7 @@ mk_stat <- function(y, stat="mean", N=NULL, fpc=TRUE, weights=NULL){
     }else if(stat == "total"){
         tbl = list(
             n = n,
-            point = .total(y=y, weights=weights),
+            point = .total(y=y, N=N, weights=weights),
             var = .var_total(y=y, N=N, fpc=fpc),
             se = .se_total(y=y, N=N, fpc=fpc),
             cv = .cv_total(y, N=N, fpc=fpc, weights=weights)
