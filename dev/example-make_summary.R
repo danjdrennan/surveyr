@@ -1,3 +1,7 @@
+library(dplyr)
+library(forcats)
+library(ggplot2)
+library(tidyr)
 # This script runs an example of what we eventually want to produce in make_summary
 # The goal is to simplify the stat args so a user can simply pass the data with
 # the desired stats to compute.
