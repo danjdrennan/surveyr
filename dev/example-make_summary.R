@@ -31,8 +31,8 @@ ggplot(d, aes(x = as_factor(stratum), y = y, fill = as_factor(stratum))) +
 group_by(d, stratum) %>%
     summarize(
         n = n(),
-        m = sum(y),
+        mean = mean(y),
         var = var(y),
-        sd=sd(y),
-        se = sqrt(var/n)
+        se = sqrt(var/n),
+        cv = se / mean
     )

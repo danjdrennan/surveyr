@@ -20,39 +20,35 @@ library(dplyr)
 library(forcats)
 library(ggplot2)
 library(tidyr)
+library(lazyeval)
 
+set.seed(1)
 # First make a synthetic dataset to play with.
 # The random variable y can be anything in this case, we just want to know that
 # there is an observation variable in a column to use.
-d <- tibble(stratum = rep(1:5, 2), y = rnorm(10, 30, 3))
+d <- tibble(stratum = rep(1:5, 4), y = round(rnorm(4*5, 30, 3), 1))
 d
 
 # Now make a synthetic set of population sizes to match with the number of strata
 # in the synthetic data. This matches what we'd expect as an input argument.
-n <- 100 * rpois(5, 15)
+N <- 10 * rpois(5, 15)
 # Create an auxiliary table to use in a join.
-tn <- tibble(stratum = 1:5, n)
+tn <- tibble(stratum = 1:5, N)
 tn
 
-# Now compare the left join with the auxiliary population data.
-# The console output shows these matching as we'd hope.
-left_join(d, tn, by = "stratum")
+left_join(d, tn, "stratum") -> d
+d
+
+d %>% group_by(stratum) %>%
+    summarize(surveyr::mk_stat(y, N=N))
+
+d %>% group_by(stratum) %>% mutate(w = N / n()) %>%
+    summarize(
+        n=n(),
+        N = sum(w),
+        surveyr::mk_stat(y, stat="mean", N=N, fpc=TRUE)
+    )
 
 
-# The last example is fine for a factor using numbers because we can match on
-# the index. Can it be replicated for letters or strings?
-
-# The main question is if the ordering of the unique factors is permuted when
-# finding the unique levels of the factor. If not, then we can simply construct
-# the auxiliary table with that factor information and apply the same method.
-animals <- c("frog", "cat", "dog", "bird", "fish")
-unique(animals)
-as_factor(animals)
-# From console, this doesn't change the order of the animals in the index.
-
-# Recreate the table now with a factor
-d <- tibble(animals = as_factor(rep(animals, 2)), y = d$y)
-
-tn <- tibble(animals=as_factor(animals), n=n)
-tn
-left_join(d, tn, )
+d %>% group_by(stratum) %>% summarize(m = mean(y), v = var(y)) %>%
+    as.data.frame
