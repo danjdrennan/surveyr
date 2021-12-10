@@ -19,8 +19,9 @@
 library(dplyr)
 library(forcats)
 library(ggplot2)
-library(tidyr)
 library(lazyeval)
+
+source("R/make_summary.R")
 
 set.seed(1)
 # First make a synthetic dataset to play with.
@@ -52,3 +53,10 @@ d %>% group_by(stratum) %>% mutate(w = N / n()) %>%
 
 d %>% group_by(stratum) %>% summarize(m = mean(y), v = var(y)) %>%
     as.data.frame
+
+
+# debug(make_summary)
+make_summary(d, stratum, y, N)
+d %>% mutate(w = log(sqrt(y))) -> dw
+dw
+make_summary(dw, stratum, y, N, .group_weights=w)
