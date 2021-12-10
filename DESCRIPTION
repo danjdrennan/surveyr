@@ -18,4 +18,5 @@ Imports:
     ggplot2,
     stats,
     tibble,
-    utils
+    utils,
+    lazyeval
