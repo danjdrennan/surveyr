@@ -24,7 +24,8 @@ estimates for
 \item{cv}{The coefficient of variation}
 }
 \description{
-stratified_stat
+Helper to compute stratified estimates for means, totals, and proportions.
+Composes tables from \code{make_summary} to estimate the stratified statistic.
 }
 \examples{
 # First need to get output from make_summary

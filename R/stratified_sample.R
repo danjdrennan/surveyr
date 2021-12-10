@@ -1,5 +1,9 @@
 #' stratified_stat
 #'
+#' @description
+#' Helper to compute stratified estimates for means, totals, and proportions.
+#' Composes tables from `make_summary` to estimate the stratified statistic.
+#'
 #' @param .tbl
 #' Output from (or similar to) `make_summary`
 #'
