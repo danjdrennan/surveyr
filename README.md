@@ -86,8 +86,6 @@ Written tests verifying imports work as expected in the `NAMESPACE`
 
 **TODO:**
 
-* Verify availability of `dplyr` in package
-
 
 ### Probability Demonstrations
 
@@ -98,9 +96,6 @@ populations to demonstrate effect of CLT on sampling distributions
     to experiment with different sampling distributions
     
 **TODO:**
-    
-Refactor `sampling_distribution` to take arbitrary point estimates for
-computing the sampling distribution
     
 Write a plotting wrapper for `sampling_distribution` to plot a finite
 population together with its sampling distribution
