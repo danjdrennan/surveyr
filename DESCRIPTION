@@ -16,7 +16,8 @@ Imports:
     forcats,
     magrittr,
     ggplot2,
+    lazyeval,
+    rlang,
     stats,
     tibble,
-    utils,
-    lazyeval
+    utils

@@ -1,5 +1,8 @@
 # imports.R
+# It is unclear which parts of rlang must be imported, so import the whole
+# package to ensure all operators and functions are available in library.
 #' @import dplyr
+#' @import rlang
 #' @importFrom forcats as_factor
 #' @importFrom stats sd
 #' @importFrom stats var
