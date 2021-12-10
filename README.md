@@ -25,9 +25,9 @@ devtools::install_github("danjdrennan/surveyr")
 The package is not available through CRAN.
 
 
-## November 2021 Update
+## December 2021 Update
 
-**Last updated:** 2021-11-23
+**Last updated:** 2021-12-10
 
 ### Overview
 
@@ -40,25 +40,27 @@ The package is not available through CRAN.
 * `mk_stat` to compute a point estimate together with its variance, standard
 error, and coefficient of variation
 
-**Reach 100% test coverage on 71 passing tests / 8 scripts / ~20 functions**
-
-Encapsulates 
-
-* ~370 lines of development code and documentation
-
-* ~320 lines of tests
-
-* ~90 lines of experimental code (in dev folder and `.Rbuildignore`)
-
-* 780 lines of code in total
-
-* 52 commits
-
 **`codecov` is tracking code coverage:**
 
 ```{url}
 https://app.codecov.io/gh/danjdrennan/surveyr/
 ```
+
+Stratified sampling (complete)
+
+Will primarily be exposed through `make_summary` (corresponding script)
+
+* Stratified SRSs combine the results developed in `mk_stat`
+
+* Need to specify `make_summary` in light of current progress
+
+* `dev/example-make_summary.R` has target output to develop to
+(numerically wrong due to method of computing statistics, but that's the goal)
+
+* Will need a modification of user input data to handle known population sizes
+
+* Will need a summary function to combine tabulated data
+
 
 ### SRS Function Implementations
 
@@ -122,22 +124,6 @@ Write a function demonstrating the law of large numbers
 Implement a LLN demo
 
 Implement plotting functions with tests
-
-
-### Stratified sampling (required)
-
-Will primarily be exposed through `make_summary` (corresponding script)
-
-* Stratified SRSs combine the results developed in `mk_stat`
-
-* Need to specify `make_summary` in light of current progress
-
-* `dev/example-make_summary.R` has target output to develop to
-(numerically wrong due to method of computing statistics, but that's the goal)
-
-* Will need a modification of user input data to handle known population sizes
-
-* Will need a summary function to combine tabulated data
 
 
 ### Inference (required)
