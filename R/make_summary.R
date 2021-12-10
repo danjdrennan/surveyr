@@ -95,7 +95,7 @@ make_summary <- function(
         # Impute weights accordingly
         wt <- .make_weights_table(.data, !!.group, !!.group_N)
 
-        left_join(.data, wt) %>%
+        left_join(.data, wt, by=.group_nm) %>%
             group_by(!!.group) %>%
             mutate(w = N / n()) -> .data
     } else{
