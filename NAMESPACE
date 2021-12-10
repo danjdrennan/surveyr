@@ -2,9 +2,11 @@
 
 export("%>%")
 export(draw_samples)
+export(make_summary)
 export(mk_stat)
 export(sampling_distribution)
 import(dplyr)
+import(rlang)
 importFrom(forcats,as_factor)
 importFrom(magrittr,"%>%")
 importFrom(stats,cor)
