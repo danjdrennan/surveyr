@@ -2,7 +2,7 @@
 % Please edit documentation in R/draw_samples.R
 \name{draw_samples}
 \alias{draw_samples}
-\title{draw_samples}
+\title{Draw an SRS from a small population}
 \usage{
 draw_samples(y, n)
 }

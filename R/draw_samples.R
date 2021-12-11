@@ -1,4 +1,4 @@
-#' draw_samples
+#' Draw an SRS from a small population
 #'
 #' @description
 #' Draws samples from a simple population of data and returns (1) the sample

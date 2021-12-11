@@ -4,7 +4,7 @@
 ## https://tidyeval.tidyverse.org/dplyr.html
 
 
-#' make_summary
+#' Summarize data from a stratified random sample
 #'
 #' @description
 #' Support for computing tables of statistics for stratified variables.

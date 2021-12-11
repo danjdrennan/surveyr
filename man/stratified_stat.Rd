@@ -2,7 +2,7 @@
 % Please edit documentation in R/stratified_sample.R
 \name{stratified_stat}
 \alias{stratified_stat}
-\title{stratified_stat}
+\title{Estimate the stratified statistic from a stratified sample dataset}
 \usage{
 stratified_stat(.tbl, .stat = "mean", .fpc = TRUE)
 }

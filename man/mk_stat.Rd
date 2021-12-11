@@ -2,7 +2,7 @@
 % Please edit documentation in R/srs_functions.R
 \name{mk_stat}
 \alias{mk_stat}
-\title{mk_stat}
+\title{Estimate a statistic from a simple random sample design}
 \usage{
 mk_stat(y, stat = "mean", N = NULL, fpc = TRUE, weights = NULL)
 }

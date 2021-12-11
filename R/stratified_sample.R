@@ -1,4 +1,4 @@
-#' stratified_stat
+#' Estimate the stratified statistic from a stratified sample dataset
 #'
 #' @description
 #' Helper to compute stratified estimates for means, totals, and proportions.

@@ -1,8 +1,8 @@
-#' sampling_distribution
+#' Compute a sampling distribution from a small population
 #'
 #' @description
-#' Computes the sampling distribution of an estimator given a population,
-#' sample size, and statistic.
+#' Composes `draw_samples` to compute the sampling distribution of an estimator
+#' given a population, sample size, and statistic.
 #' The population must be a vector of numeric variables.
 #' The statistic must be the sample mean, sample total, or sample proportion.
 #' The function must store the entire sample as a matrix at some point, so it is

@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_summary.R
 \name{make_summary}
 \alias{make_summary}
-\title{make_summary}
+\title{Summarize data from a stratified random sample}
 \usage{
 make_summary(
   .data,

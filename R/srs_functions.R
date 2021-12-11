@@ -1,7 +1,8 @@
-# Core functions used to compute statistics for simple random samples.
-# Functions for point estimates, variances, etc., are abstracted from the user
-# and made available through the function mk_stats.
-#' mk_stat
+## Core functions used to compute statistics for simple random samples.
+## Functions for point estimates, variances, etc., are abstracted from the user
+## and made available through the function mk_stats.
+
+#' Estimate a statistic from a simple random sample design
 #'
 #' @description
 #' Function to get point estimates and statistics associated with them.

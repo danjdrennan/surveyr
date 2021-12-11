@@ -2,7 +2,7 @@
 % Please edit documentation in R/sampling_distribution.R
 \name{sampling_distribution}
 \alias{sampling_distribution}
-\title{sampling_distribution}
+\title{Compute a sampling distribution from a small population}
 \usage{
 sampling_distribution(y, n, stat = "mean")
 }
@@ -19,8 +19,8 @@ Must be a string input.}
 The sampling distribution of the sample mean
 }
 \description{
-Computes the sampling distribution of an estimator given a population,
-sample size, and statistic.
+Composes \code{draw_samples} to compute the sampling distribution of an estimator
+given a population, sample size, and statistic.
 The population must be a vector of numeric variables.
 The statistic must be the sample mean, sample total, or sample proportion.
 The function must store the entire sample as a matrix at some point, so it is
