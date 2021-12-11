@@ -21,4 +21,5 @@ Imports:
     rlang,
     stats,
     tibble,
+    tidyr,
     utils
