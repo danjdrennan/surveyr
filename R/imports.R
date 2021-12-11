@@ -8,4 +8,10 @@
 #' @importFrom stats cov
 #' @importFrom stats cor
 #' @importFrom utils combn
+#' @importFrom stats qnorm
+#' @importFrom stats rnorm
+#' @importFrom stats qt
+#' @importFrom stats rt
+#' @importFrom stats rgamma
+#' @importFrom stats runif
 NULL

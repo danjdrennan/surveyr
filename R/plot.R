@@ -27,20 +27,20 @@
 #' A ggplot object (graph)
 #'
 #' @references
-#' [1] https://en.wikipedia.org/wiki/Histogram#Doane's_formula
+#' [1] \cite{https://en.wikipedia.org/wiki/Histogram#Doane's_formula}
 #'
 #' @export
 #'
 #' @examples
 #' d <- tibble::tibble(s = rep(1:3, 30), y = rnorm(90, 30*s, 5*sqrt(s)))
-#' s_plot(d, y, s, kind = "histogram") + labs(
+#' s_plot(d, y, s, kind = "histogram") + ggplot2::labs(
 #' title = "My cool plot",
 #' subtitle = "These can be entirely customized as ever you'd like",
 #' caption = "See more from ggplot help files",
 #' x = "An observed variable (with what units)",
 #' y = "Frequencies",
 #' legend = "Some group variable"
-#' ) + theme_bw()
+#' ) + ggplot2::theme_bw()
 s_plot <- function(.data, .y, .group=NULL, kind=NULL){
     # Make sure a tibble was passed
     stopifnot(class(.data)[2] == "tbl")
