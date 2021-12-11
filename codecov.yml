@@ -1,11 +1,5 @@
 comment: false
 
-language: R
-
-sudo: false
-
-cache: packages
-
 coverage:
   status:
     project:
@@ -18,6 +12,3 @@ coverage:
         target: auto
         threshold: 1%
         informational: true
-
-after_success:
-  - Rscript -e 'covr::codecov()'
