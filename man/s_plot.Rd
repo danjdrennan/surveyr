@@ -27,7 +27,7 @@ boxplots for stratified samples. Optionally, the plot for a stratified sample
 can be changed to a colorized histogram. Much greater flexibility is available
 through \code{ggplot2}, but this is a helpful starter tool for using that library.
 
-In histograms, bins are automatically computed using Doane's formula \link{1}. This
+In histograms, bins are automatically computed using Doane's formula. This
 is an immutable default choice for this implementation. Using \code{ggplot}
 directly will provide greater flexibility for specifying bin widths and other
 options.
@@ -44,5 +44,5 @@ legend = "Some group variable"
 ) + ggplot2::theme_bw()
 }
 \references{
-\link{1} \cite{https://en.wikipedia.org/wiki/Histogram#Doane's_formula}
+\cite{Doane, David P. "Aesthetic frequency classifications." The American Statistician 30.4 (1976): 181-183.}
 }
