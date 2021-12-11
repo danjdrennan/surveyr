@@ -38,3 +38,6 @@ stratified_stat(ms, .stat="total")
 make_summary(d, stratum, y, N, .stat="mean") \%>\%
 stratified_stat(.stat="mean")
 }
+\references{
+Lohr, Sharon L. Sampling: Design and Analysis. Chapman and Hall/CRC, 2019.
+}

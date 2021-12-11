@@ -39,6 +39,7 @@
 #'
 #' @references
 #' Lohr, Sharon L. Sampling: Design and Analysis. Chapman and Hall/CRC, 2019.
+#'
 #' @export
 #'
 #' @examples

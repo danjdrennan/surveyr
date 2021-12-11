@@ -28,7 +28,7 @@
 #' \item{plot}{A ggplot plot object showing convergence of the mean and variance}
 #'
 #' @references
-#' \cite{Billingsley, Patrick. Probability and measure. John Wiley & Sons, 2008.}
+#' Billingsley, Patrick. Probability and measure. John Wiley & Sons, 2008.
 #'
 #' @export
 #'

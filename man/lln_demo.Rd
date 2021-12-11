@@ -38,5 +38,5 @@ lln_demo()
 
 }
 \references{
-\cite{Billingsley, Patrick. Probability and measure. John Wiley & Sons, 2008.}
+Billingsley, Patrick. Probability and measure. John Wiley & Sons, 2008.
 }
