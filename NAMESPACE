@@ -3,6 +3,7 @@
 export("%>%")
 export(conf_int)
 export(draw_samples)
+export(lln_demo)
 export(make_summary)
 export(mk_stat)
 export(s_plot)
