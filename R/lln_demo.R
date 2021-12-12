@@ -44,14 +44,14 @@ lln_demo <- function(n=5000){
     )
 
     # In case the n supplied is not an integer, cast it as such
-    n <- as.integer(n)
+    n <- round(n)
 
     # Forcing the demo with a gamma(6, 1/20) distribution for the demo because
     # I want a distribution with some curvature and skewness, but also to obtain
     # the theoretical parameter values being estimated using the LLN
     gamma_mean <- 6 * 20
     gamma_var <- 6 * 20^2
-    y <- rgamma(n+10, shape = 6, rate = 1/20)
+    y <- rgamma(n+10, shape = 6, scale = 20)
 
     # Now construct a long dataset of cumulative mean and variance estimates
     tibble::tibble(
