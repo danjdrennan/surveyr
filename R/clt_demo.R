@@ -117,10 +117,10 @@ clt_demo <- function(
     # distribution
     if(distribution == "binormal"){
         # Make sure s is validly specified
-        if(s < 0){
+        if(is.null(s)){
+            stop("s must be non-NULL to use a binormal distribution")
+        }else if(s < 0){
             stop("s must be nonnegative in binormal distribution")
-        }else if(is.null(s)){
-            stop("s must be specified to use a binormal distribution")
         }
         # If X_i | Z_i ~ N(Z_i, S^2), P[Z=a] = P[Z = b], i = 1, ..., N:
         D <- .rbinormal(N, a, b, s)

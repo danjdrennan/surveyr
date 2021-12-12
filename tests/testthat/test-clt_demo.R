@@ -9,7 +9,8 @@ test_that("clt_demo handles errors correctly", {
     expect_error(clt_demo(distribution="Read the docs so this doesn't fail"))
     expect_error(clt_demo(a=c(1, 3)))
     expect_error(clt_demo(b=c(5, 20)))
-    expect_error(clt_demo(s=NULL))
+    expect_error(clt_demo(distribution="binormal", s=NULL))
+    expect_error(clt_demo(distribution="binormal", s=-1))
 })
 test_that("clt demo produces graph", {
     # Binormal distribution
