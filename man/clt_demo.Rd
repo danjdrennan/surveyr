@@ -50,24 +50,15 @@ this function uses the theoretical parameters from one of three specific
 distributions to show the distribution of the sample mean approaches a normal
 distribution. The user can choose between three distributions:
 \itemize{
-\item binormal A binormal distribution \eqn{X|Z \sim N(Z, s)}
-\item uniform A uniform distribution such that \eqn{X \sim U[a, b]}
-\item gamma A gamma distribution, \eqn{X \sim \Gamma(a, b)}
+\item binormal A binormal distribution \eqn{X|Z ~ N(Z, s)}
+\item uniform A uniform distribution such that \eqn{X ~ U[a, b]}
+\item gamma A gamma distribution, \eqn{X ~ \Gamma(a, b)}
 }
 
-The key to the demonstration is that the parameters from each of these
-distributions is known.
-
-Theorem (Central Limit Theorem). Let \eqn{X_1, \ldots} be a sequence of
-independent and identically distributed random variables with mean
-\eqn{E X_i = \mu} and \eqn{Var X_i = \sigma^2} for each \eqn{i}. Define
-\eqn{\bar{X}_n = n^{-1}(X_1 + \cdots X_n)}. Then
-\deqn{\frac{\lim_{n\to\infty} \sqrt{n}\bar{X}_n - \mu}{\sigma} \to N(0,1).}
-
 The central limit theorem essentially guarantees that, for a large enough
-sample size, the distribution of the mean from a probability-based sample
-converges to a standard normal distribution. This is the basis for using
-normal and t-distributed confidence intervals.
+sample size of independent samples, the distribution of the mean from a
+probability-based sample converges to a standard normal distribution.
+This is the basis for using normal and t-distributed confidence intervals.
 }
 \examples{
 # Can be run without passing any arguments

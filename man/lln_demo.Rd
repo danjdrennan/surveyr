@@ -16,19 +16,16 @@ A list with
 }
 \description{
 Provides a demonstration of the law of large numbers using draws from a
-gamma distribution with shape 20 and scale 1/20, i.e.
-\eqn{Y_i \sim \Gamma(k=6, \theta=20), i=1,2,\ldots}.
-The mean and variance, then, are \eqn{E Y_i = k\theta = 120} and
-\eqn{\mathrm{Var} Y_i = k\theta^2 = 2400} for each i.
+gamma distribution with shape 20 and scale 1/20.
+The mean and variance, then, are \eqn{k\theta = 120} and
+\eqn{k\theta^2 = 2400} for each i.
 Draws from the distribution used here can be made by \code{rgamma(n, 6, 1/20)};
 see \code{?rgamma} for more details about the function.
-A version of the Law of Large Numbers is given below.
 
-Theorem (Law of Large Numbers): Let \eqn{Y_1, \ldots} be independent and
-identically distributed random variables with expectation \eqn{E Y_i =\mu}
-for all i. Define \eqn{S_n = Y_1 + \cdots + Y_n}.
-Then \eqn{\bar{Y}_n = n^{-1}S_n \to \mu} in probability.
-A similar statement holds for convergence to the variance.
+The law of large numbers essentially states that, for independent samples
+from some parent distribution, the sample mean (variance) converges in
+probability towards the expected value of a population statistic. More precise
+statements can be found in the references or from Wikipedia.
 
 The Law of Large Numbers is useful because it gives conditions under which
 an estimator converges to its population value.
